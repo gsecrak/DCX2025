@@ -308,7 +308,6 @@ def apply_lookup(column_name: str, s: pd.Series) -> pd.Series:
     name_col = tbl.columns[1]
     map_dict = dict(zip(tbl[code_col].astype(str), tbl[name_col].astype(str)))
     return s.astype(str).map(map_dict).fillna(s)
-``
 
 
 # نُحضّر نسخة مترجمة للعرض في الفلاتر
@@ -875,6 +874,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
