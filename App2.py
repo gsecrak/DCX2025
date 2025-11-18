@@ -35,9 +35,27 @@ st.markdown(f"""
 # اتجاه عربي وخط مناسب
 st.markdown("""
     <style>
-        html, body, [class*="css"] {direction:rtl; text-align:right; font-family:"Tajawal","Cairo","Segoe UI";}
-        .stTabs [data-baseweb="tab-list"] {flex-direction: row-reverse;}
-        .stDownloadButton, .stButton > button {font-weight:600;}
+        html, body, [class*="css"] {
+            direction: rtl;
+            text-align: right;
+            font-family: "Tajawal","Cairo","Segoe UI";
+        }
+
+        /* جعل التبويبات تبدأ من جهة اليمين وبالترتيب من اليمين لليسار */
+        .stTabs [data-baseweb="tab-list"] {
+            flex-direction: row-reverse !important;   /* أول تبويب يكون عند اليمين */
+            justify-content: flex-start !important;   /* التبويبات تلتصق باليمين */
+        }
+
+        /* جعل نص كل تبويب يميني الاتجاه */
+        .stTabs [data-baseweb="tab"] {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+
+        .stDownloadButton, .stButton > button {
+            font-weight: 600;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -788,6 +806,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
