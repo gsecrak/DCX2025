@@ -495,7 +495,7 @@ with tab_sample:
                 height=500,
             )
 
-            fig.update_layout(title_font_size=18)
+            fig.update_layout(title_font_size=20)
             
             # تعديل النص حسب اختيار المستخدم
             if display_mode == "العدد فقط":
@@ -813,13 +813,13 @@ if "سعادة (%)" in summary.columns or "قيمة (%)" in summary.columns:
     # 🔥 تكبير العنوان + توسيطه
     fig.update_layout(
         title={
-            "text": "مقارنة مؤشري السعادة والقيمة حسب الخدمة",
+            "text": "📊 مقارنة مؤشري السعادة والقيمة حسب الخدمة",
             "x": 0.5,
             "y": 0.95,
             "xanchor": "center",
             "yanchor": "top"
         },
-        title_font_size=22   # ← يمكنك تغييرها لـ 24 أو 20 حسب رغبتك
+        title_font_size=20   # ← يمكنك تغييرها لـ 24 أو 20 حسب رغبتك
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -914,16 +914,25 @@ with tab_pareto:
                 textposition="top center",
                 line=dict(color="#2E86DE", width=3)
             )
-            fig.update_layout(
-                title="📊 المحاور الرئيسية - تحليل باريتو",
-                xaxis=dict(title="المحور", tickangle=-15),
-                yaxis=dict(title="عدد الملاحظات"),
-                yaxis2=dict(title="النسبة التراكمية (%)", overlaying="y", side="right", range=[0, 110]),
-                height=600,
-                bargap=0.3,
-                legend=dict(orientation="h", y=-0.2)
-            )
-            st.plotly_chart(fig, use_container_width=True)
+fig.update_layout(
+    title={
+        "text": "📊 المحاور الرئيسية - تحليل باريتو",
+        "x": 0.5,
+        "y": 0.95,
+        "xanchor": "center",
+        "yanchor": "top"
+    },
+    title_font_size=22,
+    xaxis=dict(title="المحور", tickangle=-15),
+    yaxis=dict(title="عدد الملاحظات"),
+    yaxis2=dict(title="النسبة التراكمية (%)", overlaying="y", side="right", range=[0, 110]),
+    height=600,
+    bargap=0.3,
+    legend=dict(orientation="h", y=-0.2)
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
 
 
 # =========================================================
@@ -935,6 +944,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
