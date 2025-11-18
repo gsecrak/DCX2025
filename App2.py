@@ -142,7 +142,7 @@ def load_data(csv_name: str, xlsx_name: str):
                     arabic_row.append(code_to_arabic.get(key, ""))
                 # إدراج السطر العربي في الأعلى (اختياري)
                 arabic_df = pd.DataFrame([arabic_row], columns=df.columns)
-                df = pd.concat([arabic_df, df], ignore_index=True)
+                # df = pd.concat([arabic_df, df], ignore_index=True)
 
     return df, lookup_catalog
 def load_all_entities():
@@ -860,6 +860,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
