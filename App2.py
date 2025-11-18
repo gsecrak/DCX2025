@@ -281,9 +281,22 @@ candidate_filter_cols = [c for c in df.columns if any(k in c.upper() for k in co
 # وظيفة لتطبيق جدول lookup (تربط تلقائيًا بين الأكواد والأسماء العربية)
 def apply_lookup(column_name: str, s: pd.Series) -> pd.Series:
     key = column_name.strip().upper()
-    # نحاول إيجاد جدول مطابق جزئياً في ملفات الوصف
-    match_key = next((k for k in lookup_catalog.keys() if key in k or k in key), None)
-    if not match_key:
+
+    # 1) تطابق تام بين اسم العمود واسم الشيت
+    match_key = None
+    for k in lookup_catalog.keys():
+        if k.strip().upper() == key:
+            match_key = k
+            break
+
+    # 2) إذا لم نجد تطابق تام → نحاول تطابق جزئي
+    if match_key is None:
+        for k in lookup_catalog.keys():
+            if key in k or k in key:
+                match_key = k
+                break
+
+    if match_key is None:
         return s
 
     tbl = lookup_catalog[match_key].copy()
@@ -295,6 +308,8 @@ def apply_lookup(column_name: str, s: pd.Series) -> pd.Series:
     name_col = tbl.columns[1]
     map_dict = dict(zip(tbl[code_col].astype(str), tbl[name_col].astype(str)))
     return s.astype(str).map(map_dict).fillna(s)
+``
+
 
 # نُحضّر نسخة مترجمة للعرض في الفلاتر
 df_filtered_display = df_filtered.copy()
@@ -860,6 +875,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
