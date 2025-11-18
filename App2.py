@@ -75,7 +75,7 @@ ENTITIES = {
 # =========================================================
 # تحميل البيانات مع إضافة سطر المعاني (Arabic Labels)
 # =========================================================
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def load_data(csv_name: str, xlsx_name: str):
     # البيانات الرئيسية
     df = pd.read_csv(csv_name, encoding="utf-8", low_memory=False)
@@ -719,4 +719,5 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
