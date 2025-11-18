@@ -320,6 +320,15 @@ for col, selected in applied_filters.items():
 # البيانات النهائية للعرض
 df_view = df_filtered.copy()
 
+# عناوين عربية للأعمدة التي نريد رسم توزيعها
+AR_DIST_TITLES = {
+    "AGE": "العمر",
+    "SERVICE": "الخدمة",
+    "LANGUAGE": "اللغة",
+    "PERIOD": "الفترة",
+    "CHANNEL": "القناة",
+}
+
 # =========================================================
 # التبويبات
 # =========================================================
@@ -851,6 +860,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
