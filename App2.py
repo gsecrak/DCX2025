@@ -341,7 +341,9 @@ with st.sidebar.expander("تطبيق/إزالة الفلاتر"):
         label = ARABIC_FILTER_TITLES.get(col.upper(), col)
 
         # عرض الفلتر باستخدام الاسم العربي
-        sel = st.multiselect(label, options_sorted, default=defa_
+        sel = st.multiselect(label, options_sorted, default=default)
+
+        applied_filters[col] = sel
 
 
 # تطبيق الفلاتر
@@ -892,6 +894,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
