@@ -604,7 +604,7 @@ with tab_kpis:
 # تبويب الأبعاد (3 أبعاد فقط)
 # =========================================================
 with tab_dimensions:
-    st.subheader("🧩 تحليل الأبعاد")
+    # st.subheader("🧩 تحليل الأبعاد")
 
     # نبحث عن الأعمدة التي تبدأ بـ "DimX." (الأسئلة الفرعية داخل كل بعد)
     dim_subcols = [c for c in df_view.columns if re.match(r"Dim\d+\.", str(c).strip())]
@@ -680,7 +680,7 @@ with tab_dimensions:
             fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
             fig.update_layout(
                 title={
-                    'text': "<span style='font-size:28px; font-weight:bold;'>📊 تحليل متوسط الأبعاد</span>",
+                    'text': "<span style='font-size:22px; font-weight:bold;'>📊 تحليل متوسط الأبعاد</span>",
                     'x': 0.5,  # المنتصف
                     'xanchor': 'center'
                 },
@@ -900,6 +900,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
