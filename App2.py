@@ -47,26 +47,32 @@ ENTITIES = {
     "بلدية رأس الخيمة": {
         "csv": "MUN.csv",
         "xlsx": "Digital_Data_tables2.xlsx",
+        "password": "RAK-MUN!93vB#2025",
     },
     "محاكم رأس الخيمة": {
         "csv": "CR.csv",
         "xlsx": "Digital_Data_tables3.xlsx",
+        "password": "RAK-CR!84zQ@2025",
     },
     "النيابة العامة في رأس الخيمة": {
         "csv": "PR.csv",
         "xlsx": "Digital_Data_tables4.xlsx",
+        "password": "RAK-PR!77xL&2025",
     },
     "دائرة التنمية الاقتصادية": {
         "csv": "DED.csv",
         "xlsx": "Digital_Data_tables5.xlsx",
+        "password": "RAK-DED!66pK*2025",
     },
     "جمارك رأس الخيمة": {
         "csv": "CU.csv",
         "xlsx": "Digital_Data_tables6.xlsx",
+        "password": "RAK-CU!59tM%2025",
     },
     "هيئة حماية البيئة والتنمية": {
         "csv": "EN.csv",
         "xlsx": "Digital_Data_tables7.xlsx",
+        "password": "RAK-EN!48rN^2025",
     },
 }
 
@@ -167,14 +173,30 @@ def autodetect_metric_cols(df: pd.DataFrame):
 st.sidebar.title("اختيار الجهة")
 selected_entity = st.sidebar.selectbox("الرجاء اختيار الجهة:", list(ENTITIES.keys()))
 
-# الحصول على أسماء الملفات حسب الجهة المختارة
-csv_name = ENTITIES[selected_entity]["csv"]
-xlsx_name = ENTITIES[selected_entity]["xlsx"]
+# إعداد ملفات الجهة + كلمة المرور الصحيحة
+entity_conf = ENTITIES[selected_entity]
+csv_name = entity_conf["csv"]
+xlsx_name = entity_conf["xlsx"]
+correct_password = entity_conf["password"]
 
-# تحميل البيانات الخاصة بالجهة المختارة
-df, lookup_catalog = load_data(csv_name, xlsx_name)
+# إدخال كلمة المرور
+password_input = st.sidebar.text_input(
+    "🔐 كلمة المرور للجهة المختارة:",
+    type="password",
+    help="لن يتم عرض التقرير إلا بعد إدخال كلمة المرور الصحيحة."
+)
 
-st.sidebar.markdown(f"**الجهة الحالية:** {selected_entity}")
+# التحقق من كلمة المرور قبل تحميل البيانات
+if not password_input:
+    st.warning("⚠️ الرجاء إدخال كلمة المرور لعرض تقرير الجهة المختارة.")
+    st.stop()
+elif password_input != correct_password:
+    st.error("❌ كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.")
+    st.stop()
+else:
+    # تحميل البيانات الخاصة بالجهة المختارة بعد التحقق
+    df, lookup_catalog = load_data(csv_name, xlsx_name)
+    st.sidebar.markdown(f"**الجهة الحالية:** {selected_entity}")
 
 
 st.sidebar.header("🎛️ الفلاتر")
@@ -719,5 +741,6 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
