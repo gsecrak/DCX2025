@@ -41,22 +41,16 @@ st.markdown("""
             font-family: "Tajawal","Cairo","Segoe UI";
         }
 
-        /* تحويل حاوية التبويبات بالكامل لليمين */
-        .stTabs {
-            direction: rtl !important;          /* اتجاه عربي */
-            text-align: right !important;       /* محاذاة يمين */
-            width: 100% !important;             /* تمديد للحاوية */
-        }
-
-        /* شريط التبويبات نفسه */
+        /* حاوية التبويبات نفسها تكون LTR عشان flex-end يودّيها يمين */
         .stTabs [data-baseweb="tab-list"] {
+            direction: ltr !important;            /* مهم جداً */
             display: flex !important;
-            flex-direction: row !important;     /* ترتيب طبيعي */
-            justify-content: flex-end !important; /* لصق التبويبات باليمين */
+            flex-direction: row !important;       /* ترتيب عادي */
+            justify-content: flex-end !important; /* لصق التبويبات بأقصى يمين الحاوية */
             width: 100% !important;
         }
 
-        /* نص داخل كل تبويب */
+        /* نص داخل كل تبويب يبقى عربي يمين */
         .stTabs [data-baseweb="tab"] > div {
             direction: rtl !important;
             text-align: right !important;
@@ -814,6 +808,7 @@ st.markdown("""
     footer, [data-testid="stFooter"] {opacity: 0.03 !important; height: 1px !important; overflow: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
